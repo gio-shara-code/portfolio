@@ -22,8 +22,6 @@ export default function AboutMeTerminalSection() {
     let scale = 1
     let opacity = 1
 
-    console.log('scrollTop', scrollTop)
-
     const fromScrollMouseLottie = window.innerHeight
     const toScrollMouseLottie = window.innerHeight + window.innerHeight / 4
 

@@ -7,22 +7,23 @@ export default function ParallaxProvider({
 }: {
     children: ReactNode
 }) {
-    const parallax = useRef<IParallax>(null)
     const [scrollTop, setScrollTop] = useState<number>(0)
 
-    const scrollListener = () => {
-        const onScroll = () => {
-            const { current } = parallax.current as IParallax
-
-            setScrollTop(current)
-        }
-        window.addEventListener('wheel', onScroll)
-        return () => {
-            window.removeEventListener('wheel', onScroll)
-        }
-    }
+    const parallaxRef = useRef<IParallax>(null)
 
     const headerTransition = useMemo(() => scrollTop > 300, [scrollTop])
+
+    function scrollListener() {
+        const scrollTop = parallaxRef.current?.container
+            .current as HTMLDivElement
+
+        scrollTop.onscroll = () => {
+            setScrollTop(parallaxRef.current?.current as number)
+        }
+        return () => {
+            scrollTop.onscroll = null
+        }
+    }
 
     useEffect(scrollListener, [])
 
@@ -30,7 +31,7 @@ export default function ParallaxProvider({
         <ParallaxContext.Provider
             value={{
                 scrollTop,
-                parallax,
+                parallax: parallaxRef,
                 headerTransition,
                 setScrollTop,
                 pages: 3.05,
