@@ -59,7 +59,7 @@ export default function BannerSection() {
 
     let scale = 0
     let opacity = 0
-    const stopAnimatingAt = 400
+    const stopAnimatingAt = 700
     if (scrollTop < stopAnimatingAt) {
         scale = 1 - scrollTop / (window.innerHeight * pages)
         opacity = 1 - scrollTop / stopAnimatingAt
@@ -112,10 +112,10 @@ export default function BannerSection() {
                     onClick={() => {
                         const scrollTo = 1
                         parallax.current?.scrollTo(scrollTo)
-                        const id = setTimeout(() => {
-                            setScrollTop(window.innerHeight * scrollTo)
-                            clearInterval(id)
-                        }, 500)
+                        // const id = setTimeout(() => {
+                        //     clearInterval(id)
+                        // }, 500)
+                        setScrollTop(window.innerHeight * scrollTo)
                     }}
                 />
             </div>

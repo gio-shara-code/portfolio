@@ -15,7 +15,7 @@ export default function ParallaxReactSpring() {
             <ParallaxLayer
                 sticky={{
                     start: 0,
-                    end: 0.3,
+                    end: 0.5,
                 }}
             >
                 <BannerSection />
@@ -42,7 +42,7 @@ export default function ParallaxReactSpring() {
                 offset={2}
                 sticky={{
                     start: 1,
-                    end: 2,
+                    end: 2.3,
                 }}
                 // NOTE add color to debug
                 className={'flex items-center justify-center'}

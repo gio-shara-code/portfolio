@@ -6,27 +6,30 @@ import {
 } from '../../../utils/scrollUtils'
 import Lottie from 'lottie-react'
 import scrollDownAnimationData from '../../../assets/scroll_down.json'
+import { useMediaQuery } from '../../../hooks/useMediaQuery'
 
-const fromScrollMouseLottie = 1000
-const toScrollMouseLottie = 1200
 const fromOpacity = 1
 const toOpacity = 0
 
-const fromScrollWords = 1000
-const toScrollWords = 2000
-const aboutMeText = `I'm a software engineer with a passion for programming. Right now, I'm studying and working at the Code University of Applied Sciences as a full-stack developer. I first got into coding back in high school in 2017, and I instantly fell in love with it. 
-I really enjoy building web and mobile apps, and I'm into both front-end and back-end development. My big goal is to be a great CTO someday and start my own company that makes a real difference in the world.`
+const aboutMeText = `I'm a software engineer from Berlin. I'm passionate about building stuff whether it be developer tools or applications. I'm eager to learn new things and will never be afraid of exploring new technologies.`
 
 const aboutMeList = aboutMeText.split(' ')
 
 export default function AboutMeTerminalSection() {
     const { scrollTop } = useParallaxContext()
+    const matches = useMediaQuery('(max-width: 640px)')
 
     // let showWords: string[] = [...aboutMeList]
     let showWords: string[] = []
 
     let scale = 1
     let opacity = 1
+
+    const fromScrollMouseLottie = matches ? 650 : 1000
+    const toScrollMouseLottie = matches ? 700 : 1200
+
+    const fromScrollWords = matches ? 650 : 1000
+    const toScrollWords = matches ? 1000 : 2000
 
     if (exceededScrollArea(toScrollWords, scrollTop))
         showWords = [...aboutMeList]
@@ -61,7 +64,7 @@ export default function AboutMeTerminalSection() {
             />
             <span
                 className={
-                    'not-selectable absolute top-[160px] left-[35px] text-white max-w-[700px] text-left text-xl font-thin'
+                    'not-selectable absolute top-[80px] left-[20px] sm:top-[160px] sm:left-[35px] text-white max-w-[340px] sm:max-w-[400px] sm:max-w-[700px] text-xl text-left sm:text-5xl font-thin'
                 }
             >
                 {showWords.join(' ')}
