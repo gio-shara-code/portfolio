@@ -6,7 +6,6 @@ import {
 } from '../../../utils/scrollUtils'
 import Lottie from 'lottie-react'
 import scrollDownAnimationData from '../../../assets/scroll_down.json'
-import { useMediaQuery } from '../../../hooks/useMediaQuery'
 
 const fromOpacity = 1
 const toOpacity = 0
@@ -17,21 +16,19 @@ const aboutMeList = aboutMeText.split(' ')
 
 export default function AboutMeTerminalSection() {
     const { scrollTop } = useParallaxContext()
-    const matches = useMediaQuery('(max-width: 640px)')
 
-    // let showWords: string[] = [...aboutMeList]
     let showWords: string[] = []
 
     let scale = 1
     let opacity = 1
 
-    const fromScrollMouseLottie = matches ? 650 : window.innerHeight
-    const toScrollMouseLottie = matches
-        ? 700
-        : window.innerHeight + window.innerHeight / 4
+    console.log('scrollTop', scrollTop)
 
-    const fromScrollWords = matches ? 650 : window.innerHeight
-    const toScrollWords = matches ? 1000 : window.innerHeight * 2
+    const fromScrollMouseLottie = window.innerHeight
+    const toScrollMouseLottie = window.innerHeight + window.innerHeight / 4
+
+    const fromScrollWords = window.innerHeight
+    const toScrollWords = window.innerHeight * 2
 
     if (exceededScrollArea(toScrollWords, scrollTop))
         showWords = [...aboutMeList]
