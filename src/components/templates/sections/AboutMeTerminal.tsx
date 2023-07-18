@@ -25,11 +25,13 @@ export default function AboutMeTerminalSection() {
     let scale = 1
     let opacity = 1
 
-    const fromScrollMouseLottie = matches ? 650 : 1000
-    const toScrollMouseLottie = matches ? 700 : 1200
+    const fromScrollMouseLottie = matches ? 650 : window.innerHeight
+    const toScrollMouseLottie = matches
+        ? 700
+        : window.innerHeight + window.innerHeight / 4
 
-    const fromScrollWords = matches ? 650 : 950
-    const toScrollWords = matches ? 1000 : 1925
+    const fromScrollWords = matches ? 650 : window.innerHeight
+    const toScrollWords = matches ? 1000 : window.innerHeight * 2
 
     if (exceededScrollArea(toScrollWords, scrollTop))
         showWords = [...aboutMeList]
