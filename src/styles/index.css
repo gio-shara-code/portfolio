@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Titillium Web, sans-serif;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  max-width: 3000px;
+}
+
+/*@layer base {*/
+/*  h1 {*/
+/*    @apply font-semibold;*/
+/*  }*/
+
+/*  h2 {*/
+/*    @apply text-2xl font-semibold;*/
+/*  }*/
+
+/*  h3 {*/
+/*    @apply text-2xl font-medium;*/
+/*  }*/
+/*}*/
+
+/**
+  sm -> 640
+  md -> 768
+  lg -> 1024
+  xl -> 1280
+  2xl -> 1536
+ */
+
+@layer base {
+  h1 {
+    font-size: 64px;
+    line-height: 34px;
+    font-weight: bold;
+  }
+  h2 {
+    font-size: 56px;
+    line-height: 44px;
+    font-weight: bold;
+  }
+  h3 {
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 500;
+  }
+  p {
+    @apply text-3xl font-normal
+  }
+}
+
+@media screen(sm) {
+  h1 {
+    font-size: 96px;
+    line-height: 96px;
+  }
+
+  p {
+    @apply text-5xl
+  }
+}
+
+
+/*@media screen(lg) {*/
+/*  h1 {*/
+/*    font-size: 110px;*/
+/*    line-height: 110px;*/
+/*  }*/
+/*}*/
+
+@media screen(md) {
+  h1 {
+    font-size: 150px;
+    line-height: 150px;
+  }
+}
+
+.not-selectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
