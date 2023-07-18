@@ -25,8 +25,6 @@ export default function AboutMeTerminalSection() {
     let scale = 1
     let opacity = 1
 
-    console.log('scrollTop', scrollTop)
-
     const fromScrollMouseLottie = matches ? 650 : 1000
     const toScrollMouseLottie = matches ? 700 : 1200
 

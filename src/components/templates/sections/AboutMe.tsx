@@ -35,8 +35,6 @@ export default function AboutMeSection() {
 
         opacity = fromOpacity + p1 * currentPercentage
         scale = fromScale + p2 * currentPercentage
-        console.log('opacity', opacity)
-        console.log('scale', scale)
     }
 
     return (
