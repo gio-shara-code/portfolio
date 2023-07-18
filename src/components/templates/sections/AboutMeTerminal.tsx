@@ -25,11 +25,13 @@ export default function AboutMeTerminalSection() {
     let scale = 1
     let opacity = 1
 
+    console.log('scrollTop', scrollTop)
+
     const fromScrollMouseLottie = matches ? 650 : 1000
     const toScrollMouseLottie = matches ? 700 : 1200
 
-    const fromScrollWords = matches ? 650 : 1000
-    const toScrollWords = matches ? 1000 : 2000
+    const fromScrollWords = matches ? 650 : 950
+    const toScrollWords = matches ? 1000 : 1925
 
     if (exceededScrollArea(toScrollWords, scrollTop))
         showWords = [...aboutMeList]
@@ -64,7 +66,7 @@ export default function AboutMeTerminalSection() {
             />
             <span
                 className={
-                    'not-selectable absolute top-[80px] left-[20px] sm:top-[160px] sm:left-[35px] text-white max-w-[340px] sm:max-w-[400px] sm:max-w-[700px] text-xl text-left sm:text-5xl font-thin'
+                    'not-selectable absolute top-[80px] left-[20px] sm:top-[160px] sm:left-[35px] text-white max-w-[340px] sm:max-w-[400px] sm:max-w-[715px] text-xl text-left sm:text-5xl font-thin'
                 }
             >
                 {showWords.join(' ')}
