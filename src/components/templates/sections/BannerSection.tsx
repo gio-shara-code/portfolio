@@ -5,6 +5,7 @@ import IconBouncingButton from '../../molecules/buttons/IconBouncing'
 
 import { useParallaxContext } from '../../../context/parallaxContext'
 import { useRef } from 'react'
+import { calculateOpacityAndScale } from '../../../utils/scrollUtils'
 
 const fromTransform = { transform: 'translateY(50px)' }
 const toTransform = { transform: 'translateY(0)' }
@@ -12,7 +13,7 @@ const toTransform = { transform: 'translateY(0)' }
 export default function BannerSection() {
     const handWaveLottieRef = useRef<LottieRefCurrentProps>(null)
 
-    const { setScrollTop, parallax, scrollTop, pages } = useParallaxContext()
+    const { setScrollTop, parallax, scrollTop } = useParallaxContext()
     const [helloPropsTransform] = useSpring(() => ({
         delay: 800,
         config: {
@@ -57,13 +58,24 @@ export default function BannerSection() {
 
     const helloStyle = { ...helloPropsOpacity, ...helloPropsTransform }
 
-    let scale = 0
-    let opacity = 0
-    const stopAnimatingAt = 700
-    if (scrollTop < stopAnimatingAt) {
-        scale = 1 - scrollTop / (window.innerHeight * pages)
-        opacity = 1 - scrollTop / stopAnimatingAt
-    }
+    const fromOpacity = 1
+    const toOpacity = 0
+
+    const fromScale = 1
+    const toScale = 0.7
+
+    const fromScroll = 0
+    const toScroll = window.innerHeight
+
+    const { opacity, scale } = calculateOpacityAndScale(
+        fromScale,
+        fromOpacity,
+        toScale,
+        toOpacity,
+        toScroll,
+        fromScroll,
+        scrollTop
+    )
 
     return (
         <section
