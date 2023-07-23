@@ -14,7 +14,7 @@ export const ParallaxContext = createContext<Context>({
     parallax: { current: null },
     headerTransition: false,
     setScrollTop: () => {},
-    pages: 4,
+    pages: 3,
 })
 
 export const useParallaxContext = () => {
