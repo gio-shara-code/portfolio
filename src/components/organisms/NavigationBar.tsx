@@ -125,13 +125,36 @@ NavigationBar.Mobile = () => {
     return (
         <div className={'flex items-center justify-between'}>
             <div className={'flex items-center gap-x-5'}>
-                <NavigationBarMobileIcon Icon={FaGithub} />
-                <NavigationBarMobileIcon Icon={FaLinkedin} />
-                <NavigationBarMobileIcon Icon={FaYoutube} />
+                <a
+                    target={'_blank'}
+                    href={'https://github.com/gio-shara-code/'}
+                >
+                    <NavigationBarMobileIcon Icon={FaGithub} />
+                </a>
+                <a
+                    target={'_blank'}
+                    href={
+                        'https://www.linkedin.com/in/giorgi-sharashenidze-3bb9311a0/'
+                    }
+                >
+                    <NavigationBarMobileIcon Icon={FaLinkedin} />
+                </a>
+                <a
+                    target={'_blank'}
+                    href={
+                        'https://www.youtube.com/channel/UCyTmDbHBLWrjdE3WChgCpaw'
+                    }
+                >
+                    <NavigationBarMobileIcon Icon={FaYoutube} />
+                </a>
             </div>
             <div className={'flex items-center gap-x-5'}>
-                <NavigationBarMobileIcon Icon={FaWhatsapp} />
-                <NavigationBarMobileIcon Icon={FaEnvelope} />
+                <a target={'_blank'} href={'https://wa.me/+4917681376567'}>
+                    <NavigationBarMobileIcon Icon={FaWhatsapp} />
+                </a>
+                <a href={'mailto:gio.shara12345@gmail.com'}>
+                    <NavigationBarMobileIcon Icon={FaEnvelope} />
+                </a>
             </div>
         </div>
     )
