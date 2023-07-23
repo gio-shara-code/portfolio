@@ -1,88 +1,67 @@
 import { useParallaxContext } from '../../../context/parallaxContext'
+import Typed from 'react-typed'
+import { useRef } from 'react'
 import {
-    calculatePercentageOfTheCurrentScrollTopValue,
-    exceededScrollArea,
+    calculateOpacityAndScale,
     isInScrollArea,
 } from '../../../utils/scrollUtils'
-import Lottie from 'lottie-react'
-import scrollDownAnimationData from '../../../assets/scroll_down.json'
-
-const fromOpacity = 1
-const toOpacity = 0
 
 const aboutMeText = `I'm a software engineer from Berlin. I'm passionate about building stuff whether it be developer tools or applications. I'm eager to learn new things and will never be afraid of exploring new technologies.`
 
-const aboutMeList = aboutMeText.split(' ')
-
 export default function AboutMeTerminalSection() {
+    const animationStarted = useRef<boolean>(false)
     const { scrollTop } = useParallaxContext()
 
-    let showWords: string[] = []
+    const fromOpacity = 0.4
+    const toOpacity = 1
 
-    let scale = 1
-    let opacity = 1
+    const fromScale = 0.8
+    const toScale = 1
 
-    const fromScrollMouseLottie = window.innerHeight
-    const toScrollMouseLottie = window.innerHeight + window.innerHeight / 4
+    const fromScroll = window.innerHeight - window.innerHeight / 2
+    const toScroll = window.innerHeight
 
-    const fromScrollWords = window.innerHeight
-    const toScrollWords = window.innerHeight * 2
+    const { opacity, scale } = calculateOpacityAndScale(
+        fromScale,
+        fromOpacity,
+        toScale,
+        toOpacity,
+        toScroll,
+        fromScroll,
+        scrollTop
+    )
 
-    if (exceededScrollArea(toScrollWords, scrollTop))
-        showWords = [...aboutMeList]
-
-    if (isInScrollArea(fromScrollWords, toScrollWords, scrollTop)) {
-        const p = calculatePercentageOfTheCurrentScrollTopValue(
-            fromScrollWords,
-            toScrollWords,
-            scrollTop
-        )
-        const a = (p / 100) * aboutMeList.length
-        showWords = [...aboutMeList.slice(0, a)]
-    }
-
-    if (exceededScrollArea(toScrollMouseLottie, scrollTop)) opacity = toOpacity
-
-    if (isInScrollArea(fromScrollMouseLottie, toScrollMouseLottie, scrollTop)) {
-        const p = calculatePercentageOfTheCurrentScrollTopValue(
-            fromScrollMouseLottie,
-            toScrollMouseLottie,
-            scrollTop
-        )
-        opacity = fromOpacity - (p / 100) * fromOpacity
-    }
+    if (
+        !animationStarted.current &&
+        isInScrollArea(fromScroll, toScroll, scrollTop)
+    )
+        animationStarted.current = true
 
     return (
-        <section className={'relative mx-auto flex flex-col items-center'}>
-            <img
-                src={'/terminal.png'}
-                className={'cover w-[800px] mx-auto'}
-                alt={'Terminal image png'}
-            />
-            <span
-                className={
-                    'not-selectable absolute top-[80px] left-[20px] sm:top-[160px] sm:left-[35px] text-white max-w-[340px] sm:max-w-[400px] sm:max-w-[715px] text-xl text-left sm:text-5xl font-thin'
-                }
-            >
-                {showWords.join(' ')}
-            </span>
-            {/*<div*/}
-            {/*    style={{*/}
-            {/*        transform: `scale(${scale}px)`,*/}
-            {/*    }}*/}
-            {/*    className={'relative '}*/}
-            {/*>*/}
-            <div></div>
-            <Lottie
-                autoplay={true}
+        <section>
+            <div
                 style={{
-                    transform: `scale(${scale}px))`,
                     opacity,
+                    transform: `scale(${scale})`,
                 }}
-                className={'h-[90px]'}
-                animationData={scrollDownAnimationData}
-            />
-            {/*</div>*/}
+                className={'relative flex flex-col items-center mx-auto'}
+            >
+                <img
+                    src={'/terminal.png'}
+                    className={'cover w-[800px] mx-auto'}
+                    alt={'Terminal image png'}
+                />
+
+                <p
+                    className={
+                        'absolute font-semibold top-[50%] h-[215px] translate-y-[-25%] sm:translate-y-[-50%] max-w-[325px] sm:max-w-[700px] text-center text-white text-lg text-left sm:text-4xl sm:leading-[55px] font-thin'
+                    }
+                >
+                    {animationStarted.current && (
+                        <Typed typeSpeed={25} strings={[aboutMeText]} />
+                    )}
+                </p>
+            </div>
         </section>
     )
 }
