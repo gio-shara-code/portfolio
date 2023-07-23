@@ -2,9 +2,11 @@ import { Parallax, ParallaxLayer } from '@react-spring/parallax'
 import BannerSection from '../templates/sections/BannerSection'
 import AboutMeTerminalSection from '../templates/sections/AboutMeTerminal'
 import { useParallaxContext } from '../../context/parallaxContext'
+import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 export default function ParallaxReactSpring() {
     const { parallax, pages } = useParallaxContext()
+    const matches = useMediaQuery('(min-width: 640px)')
 
     return (
         <Parallax
@@ -15,7 +17,7 @@ export default function ParallaxReactSpring() {
             <ParallaxLayer
                 sticky={{
                     start: 0,
-                    end: 0.5,
+                    end: matches ? 0.5 : 0.8,
                 }}
             >
                 <BannerSection />
