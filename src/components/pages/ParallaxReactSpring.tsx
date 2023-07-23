@@ -17,7 +17,7 @@ export default function ParallaxReactSpring() {
             <ParallaxLayer
                 sticky={{
                     start: 0,
-                    end: matches ? 0.5 : 0.8,
+                    end: matches ? 0.4 : 0.7,
                 }}
             >
                 <BannerSection />
