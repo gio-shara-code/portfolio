@@ -29,3 +29,45 @@ export const isInScrollArea = (
 export const exceededScrollArea = (toScroll: number, scrollTop: number) => {
     return scrollTop > toScroll
 }
+
+export const calculateOpacityAndScale = (
+    fromScale: number,
+    fromOpacity: number,
+    toScale: number,
+    toOpacity: number,
+    toScroll: number,
+    fromScroll: number,
+    scrollTop: number
+) => {
+    let scale = fromScale
+    let opacity = fromOpacity
+
+    if (exceededScrollArea(toScroll, scrollTop)) {
+        scale = toScale
+        opacity = toOpacity
+    }
+
+    if (isInScrollArea(fromScroll, toScroll, scrollTop)) {
+        const currentPercentage = calculatePercentageOfTheCurrentScrollTopValue(
+            fromScroll,
+            toScroll,
+            scrollTop
+        )
+
+        const opacityPercentage = calculateDiffDividedBy100(
+            toOpacity,
+            fromOpacity
+        )
+        const scalePercentage = calculateDiffDividedBy100(toScale, fromScale)
+
+        if (fromOpacity < toOpacity)
+            opacity = fromOpacity + opacityPercentage * currentPercentage
+        else opacity = fromOpacity - opacityPercentage * currentPercentage
+
+        if (fromScale < toScale)
+            scale = fromScale + scalePercentage * currentPercentage
+        else scale = fromScale - scalePercentage * currentPercentage
+    }
+
+    return { opacity, scale }
+}
